@@ -30,7 +30,7 @@ def get_cupcakes_data():
 
 @app.route('/api/cupcakes/<cupcake_id>')
 def get_cupcake_detail(cupcake_id):
-    cupcake = Cupcake.query.get(cupcake_id).serialize_cupcake()
+    cupcake = Cupcake.query.get_or_404(cupcake_id).serialize_cupcake()
     return jsonify(cupcake)
 
 @app.route('/api/cupcakes', methods=['POST'])
@@ -44,6 +44,11 @@ def post_new_cupcake():
     db.session.commit()
     
     return ( jsonify(new_cupcake.serialize_cupcake()), 201 )
+
+
+@app.route('/api/cupcakes/<cupcake_id>', methods=['PATCH'])
+def patch_cupcake(cupcake_id):
+    return "tgesdgd"
 
 if __name__ == '__main__':
     app.run(debug=True)
