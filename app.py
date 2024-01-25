@@ -1,5 +1,5 @@
 """Flask app for Cupcakes"""
-from flask import Flask, jsonify, redirect, request
+from flask import Flask, jsonify, render_template, redirect, request
 from models import db, connect_db, Cupcake
 from dotenv import load_dotenv
 load_dotenv()
@@ -21,7 +21,8 @@ with app.app_context():
 
 @app.route('/')
 def home():
-    return redirect('/api/cupcakes')
+    cupcakes = Cupcake.query.all()
+    return render_template('index.html', cupcakes=cupcakes)
 
 @app.route('/api/cupcakes')
 def get_cupcakes_data():

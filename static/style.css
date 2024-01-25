@@ -1,0 +1,18 @@
+.flex {
+  display: flex;
+}
+button[type="submit"] {
+  padding: 1rem 2rem;
+}
+.edit-btn,
+.delete-btn {
+  padding: 0.25rem 0.5rem;
+}
+button {
+  background-color: bisque;
+  border-color: bisque;
+  cursor: pointer;
+}
+button:hover {
+  background-color: aquamarine;
+}

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="static/style.css" />
+  </head>
+  <body>
+    <button type="submit">Add Cupcake</button>
+    <div class="flex">
+      {% for cupcake in cupcakes %}
+      <div>
+        <p>{{cupcake.flavor}}</p>
+        <p>{{cupcake.size}}</p>
+        <p>{{cupcake.rating}}</p>
+        <img
+          src="{{cupcake.image}}"
+          alt="image of cupcake"
+          width="200"
+          height="300"
+        />
+        <button class="edit-btn">Edit</button>
+        <button class="delete-btn">Delete</button>
+      </div>
+      {% endfor %}
+    </div>
+    <script src="static/app.js"></script>
+  </body>
+</html>
