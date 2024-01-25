@@ -73,6 +73,28 @@ class CupcakeJsonCase(TestCase):
             self.assertEqual(resp.json['image'], cupcake['image'])
             self.assertEqual(resp.json['rating'], cupcake['rating'])
             self.assertEqual(resp.json['size'], cupcake['size'])
+            
+    def test_patch_cupcake(self):
+        with app.test_client() as client:
+            resp = client.patch(f"/api/cupcakes/{self.cupcake_id}", json={'flavor': 'orange'})
+            self.assertEqual(resp.status_code, 200)
+            cupcake = {
+                'id': self.cupcake_id,
+                'image': 'https://thestayathomechef.com/wp-content/uploads/2017/12/Most-Amazing-Chocolate-Cupcakes-1-small.jpg',
+                'rating': 6.0,
+                'size': 'small',
+                'flavor': 'orange'
+            }
+            self.assertDictEqual(cupcake, resp.json)
+
+    def test_delete_cupcake(self):
+        with app.test_client() as client:
+            resp = client.delete(f"/api/cupcakes/{self.cupcake_id}")
+            self.assertEqual(resp.status_code, 200)
+            self.assertDictEqual({"message": "delete"}, resp.json)
+            
+            
+        
           
 if __name__ == "__main__":
     import unittest
