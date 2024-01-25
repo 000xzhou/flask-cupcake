@@ -18,7 +18,8 @@ app.secret_key = secret_key
 connect_db(app)
 with app.app_context():
     db.create_all()
-
+# todo: Add functionality for searching for cupcakes where you can type in a search term, submit to the backend and see a newly filtered list of cupcakes.
+# todo: Refactor your HTML page to render a form created by WTForms.
 @app.route('/')
 def home():
     cupcakes = Cupcake.query.all()
@@ -46,7 +47,7 @@ def post_new_cupcake():
     
     return ( jsonify(new_cupcake.serialize_cupcake()), 201 )
 
-
+# ? maybe: Are you still here?? Then add another table for ingredients. When you add or edit a cupcake, you can identify what ingredients you need for that cupcake. You should also have a page where you can add or edit ingredients.
 @app.route('/api/cupcakes/<cupcake_id>', methods=['PATCH'])
 def patch_cupcake(cupcake_id):
     cupcake = Cupcake.query.get_or_404(cupcake_id)

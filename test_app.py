@@ -94,7 +94,7 @@ class CupcakeJsonCase(TestCase):
             self.assertDictEqual({"message": "delete"}, resp.json)
             
             
-        
+# todo: Add tests to make sure that the GET/PATCH/DELETE routes return a 404 when the cupcake cannot be found.
           
 if __name__ == "__main__":
     import unittest
