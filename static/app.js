@@ -1,4 +1,5 @@
 // todo: Refactor your front-end code to be object-oriented using class methods to fetchAllCupcakes and createCupcakes and instance methods for updating and deleting cupcakes as well as searching for cupcakes.
+// todo: add dom-ma... atm it don't update the dom without refreshing.
 
 // POST
 const addCupcakeForm = document.getElementById("add-cupcake");
@@ -57,6 +58,30 @@ async function deleteCupcake() {
   try {
     let id = this.parentElement.dataset.id;
     const response = await axios.delete(`/api/cupcakes/${id}`);
+    console.log("Response:", response.data);
+  } catch (error) {
+    console.error(
+      "Error Code:",
+      error.code,
+      "\nError Name:",
+      error.name,
+      "\nError Message:",
+      error.message
+    );
+  }
+}
+
+// PATCH
+editBtns = document.querySelectorAll(".edit-btn");
+
+editBtns.forEach((btn) => {
+  btn.addEventListener("click", editCupcake);
+});
+async function editCupcake() {
+  try {
+    // ? need an edit form.... or use the add form... but need to change name then. should I just add a route for it? a new html? why not?
+    let id = this.parentElement.dataset.id;
+    const response = await axios.patch(`/api/cupcakes/${id}`);
     console.log("Response:", response.data);
   } catch (error) {
     console.error(

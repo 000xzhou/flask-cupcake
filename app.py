@@ -19,7 +19,6 @@ connect_db(app)
 with app.app_context():
     db.create_all()
 # todo: Add functionality for searching for cupcakes where you can type in a search term, submit to the backend and see a newly filtered list of cupcakes.
-# todo: Refactor your HTML page to render a form created by WTForms.
 @app.route('/')
 def home():
     cupcakes = Cupcake.query.all()
