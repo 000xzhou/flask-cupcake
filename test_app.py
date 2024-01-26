@@ -31,7 +31,7 @@ class CupcakeJsonCase(TestCase):
     def test_home(self):
         with app.test_client() as client:
             resp = client.get("/")
-            self.assertEqual(resp.status_code, 302)
+            self.assertEqual(resp.status_code, 200)
     
     def test_all_cupcakes(self):
         with app.test_client() as client:
@@ -92,9 +92,24 @@ class CupcakeJsonCase(TestCase):
             resp = client.delete(f"/api/cupcakes/{self.cupcake_id}")
             self.assertEqual(resp.status_code, 200)
             self.assertDictEqual({"message": "delete"}, resp.json)
+    
+    # TESTING ERRORS when cupcak can't be found
+    def test_get_cupcake_error(self):
+        with app.test_client() as client:
+            resp = client.get(f"/api/cupcakes/6856")
+            self.assertEqual(resp.status_code, 404)
             
+    def test_patch_cupcake_error(self):
+        with app.test_client() as client:
+            resp = client.patch(f"/api/cupcakes/43644", json={'size': 'large'})
+            self.assertEqual(resp.status_code, 404)
             
-# todo: Add tests to make sure that the GET/PATCH/DELETE routes return a 404 when the cupcake cannot be found.
+    def test_delete_cupcake_error(self):
+        with app.test_client() as client:
+            resp = client.delete(f"/api/cupcakes/43644")
+            self.assertEqual(resp.status_code, 404)
+            
+
           
 if __name__ == "__main__":
     import unittest
