@@ -18,11 +18,25 @@ app.secret_key = secret_key
 connect_db(app)
 with app.app_context():
     db.create_all()
+    
 @app.route('/')
 def home():
     cupcakes = Cupcake.query.all()
+    # search = request.args.get('flavor', '').lower()
+    # if search:
+    #     results = Cupcake.query.filter(Cupcake.flavor.ilike(f'%{search}%')).all()
+    # else:
+        # results = cupcakes
+    # results = Cupcake.query
     form = AddCupcake()
-    return render_template('index.html', cupcakes=cupcakes, form=form)
+    return render_template('index.html', results=cupcakes, form=form)
+
+@app.route('/api/search')
+def get_cupcake_search_result():
+    flavor = request.args.get('flavor', '').lower()
+    results_flavor = Cupcake.query.filter(Cupcake.flavor.ilike(f'%{flavor}%')).all()
+    cupcakes = [c.serialize_cupcake() for c in results_flavor]
+    return jsonify(cupcakes)
 
 @app.route('/cupcakes/<cupcake_id>')
 def edit_cupcake_page(cupcake_id):

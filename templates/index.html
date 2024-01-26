@@ -14,9 +14,17 @@
   <button id="add-cupcake-btn" type="submit">Add Cupcake</button>
 </form>
 <hr />
+<form id="search-cupcake" method="get">
+  <!-- Input for search query -->
+  <input id="searchFlavor" type="text" name="flavor" placeholder="Search..." />
+
+  <!-- Button to submit the form -->
+  <button type="submit">Search</button>
+</form>
+
 <h3>List of cupcakes</h3>
 <div class="flex" id="list-of-cupcakes">
-  {% for cupcake in cupcakes %}
+  {% for cupcake in results %}
   <div class="cupcake" data-id="{{cupcake.id}}">
     <p>{{cupcake.flavor}}</p>
     <p>{{cupcake.size}}</p>
