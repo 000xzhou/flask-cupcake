@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="static/style.css" />
   </head>
   <body>
-    <form id="add" action="/api/cupcakes" method="POST" class="form-box">
+    <form id="add-cupcake" method="POST" class="form-box">
       {{ form.hidden_tag() }}
       <!--add type=hidden form fields -->
       <h3>Add a cupcake</h3>
@@ -19,7 +19,7 @@
 
       {% endfor %}
 
-      <button type="submit">Add Cupcake</button>
+      <button id="add-cupcake-btn" type="submit">Add Cupcake</button>
     </form>
     <hr />
     <h3>List of cupcakes</h3>
@@ -40,6 +40,7 @@
       </div>
       {% endfor %}
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="static/app.js"></script>
   </body>
 </html>
