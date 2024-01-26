@@ -23,7 +23,6 @@ async function editCupcake(e) {
       }
     }
   }
-  console.log(formData.rating);
   if (formData.rating > 10 || formData.rating < 0) {
     // add error
     formErrorMessage("Rating have to be between 0 and 10");
@@ -46,7 +45,7 @@ async function editCupcake(e) {
           },
         }
       );
-      console.log("Response:", response.data);
+      // console.log("Response:", response.data);
       // redirect back to home after suessful edit
       window.location.href = "/";
     } catch (error) {
