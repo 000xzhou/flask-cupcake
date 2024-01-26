@@ -31,3 +31,10 @@ class Cupcake(db.Model):
             "rating": self.rating,
             "image": self.image,
         }
+    ingredients = db.relationship('Ingredient', backref='cupcake', lazy=True)
+        
+class Ingredient(db.Model):
+    __tablename__ = 'ingredients'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.String(50), nullable=False)
+    cupcake_id = db.Column(db.Integer, db.ForeignKey('cupcakes.id'), nullable=False)

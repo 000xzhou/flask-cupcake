@@ -4,7 +4,7 @@ from models import db, connect_db, Cupcake
 from dotenv import load_dotenv
 load_dotenv()
 import os
-from forms import AddCupcake
+from forms import AddCupcake, EditCupcake
 
 app = Flask(__name__)
 secret_key = os.environ.get('SECRET_KEY')
@@ -24,6 +24,14 @@ def home():
     cupcakes = Cupcake.query.all()
     form = AddCupcake()
     return render_template('index.html', cupcakes=cupcakes, form=form)
+
+@app.route('/cupcakes/<cupcake_id>')
+def edit_cupcake_page(cupcake_id):
+    cupcake = Cupcake.query.get_or_404(cupcake_id)
+    form = EditCupcake(obj = cupcake)
+    form.id.data = cupcake.id
+    
+    return render_template('edit_cupcake.html', form=form)
 
 @app.route('/api/cupcakes')
 def get_cupcakes_data():

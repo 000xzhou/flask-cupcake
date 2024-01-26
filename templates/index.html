@@ -1,46 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="static/style.css" />
-  </head>
-  <body>
-    <form id="add-cupcake" method="POST" class="form-box">
-      {{ form.hidden_tag() }}
-      <!--add type=hidden form fields -->
-      <h3>Add a cupcake</h3>
-      {% for field in form if field.widget.input_type != 'hidden' %}
-      <p>
-        {{ field.label }} {{ field }} {% for error in field.errors %} {{ error
-        }} {% endfor %}
-      </p>
+{% extends 'base.html' %} {% block content %}
+<form id="add-cupcake" method="POST" class="form-box">
+  {{ form.hidden_tag() }}
+  <!--add type=hidden form fields -->
+  <h3>Add a cupcake</h3>
+  {% for field in form if field.widget.input_type != 'hidden' %}
+  <p>
+    {{ field.label }} {{ field }} {% for error in field.errors %} {{ error }} {%
+    endfor %}
+  </p>
 
-      {% endfor %}
+  {% endfor %}
 
-      <button id="add-cupcake-btn" type="submit">Add Cupcake</button>
-    </form>
-    <hr />
-    <h3>List of cupcakes</h3>
-    <div class="flex">
-      {% for cupcake in cupcakes %}
-      <div class="cupcake" data-id="{{cupcake.id}}">
-        <p>{{cupcake.flavor}}</p>
-        <p>{{cupcake.size}}</p>
-        <p>{{cupcake.rating}}</p>
-        <img
-          src="{{cupcake.image}}"
-          alt="image of cupcake"
-          width="200"
-          height="300"
-        />
-        <button class="edit-btn">Edit</button>
-        <button class="delete-btn">Delete</button>
-      </div>
-      {% endfor %}
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="static/app.js"></script>
-  </body>
-</html>
+  <button id="add-cupcake-btn" type="submit">Add Cupcake</button>
+</form>
+<hr />
+<h3>List of cupcakes</h3>
+<div class="flex" id="list-of-cupcakes">
+  {% for cupcake in cupcakes %}
+  <div class="cupcake" data-id="{{cupcake.id}}">
+    <p>{{cupcake.flavor}}</p>
+    <p>{{cupcake.size}}</p>
+    <p>{{cupcake.rating}}</p>
+    <img
+      src="{{cupcake.image}}"
+      alt="image of cupcake"
+      width="200"
+      height="300"
+    />
+    <a href="/cupcakes/{{cupcake.id}}">Edit</a>
+    <button class="delete-btn">Delete</button>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

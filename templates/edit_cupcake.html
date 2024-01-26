@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <form id="edit-cupcake" method="PATCH" class="form-box">
+      {{ form.hidden_tag() }}
+      <!--add type=hidden form fields -->
+      <h3>Edit this cupcake</h3>
+      {% for field in form if field.widget.input_type != 'hidden' %}
+      <p>
+        {{ field.label }} {{ field }} {% for error in field.errors %} {{ error
+        }} {% endfor %}
+      </p>
+
+      {% endfor %}
+
+      <button class="edit-btn" type="submit">Edit</button>
+    </form>
+    <hr />
+    <h3>Ingredients:</h3>
+    <!-- to be conutine  -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="/static/editCupcakeEvent.js"></script>
+  </body>
+</html>
