@@ -32,6 +32,10 @@ def edit_cupcake_page(cupcake_id):
     
     return render_template('edit_cupcake.html', form=form)
 
+@app.errorhandler(404)
+def not_found_error(error):
+    return render_template('404.html'), 404
+
 @app.route('/api/cupcakes')
 def get_cupcakes_data():
     cupcakes = [c.serialize_cupcake() for c in Cupcake.query.all()]

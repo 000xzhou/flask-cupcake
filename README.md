@@ -1,9 +1,5 @@
 # flask-cupcake
 
-## questions
-
-- why are we using models? Since forms/js post the data out side of models range?
-
 ## todo
 
 - Add tests to make sure that the GET/PATCH/DELETE routes return a 404 when the cupcake cannot be found.
