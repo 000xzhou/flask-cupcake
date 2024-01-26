@@ -1,5 +1,6 @@
 // PATCH
-import { formErrorMessage } from "./domChanges.js";
+import { formErrorMessage, removeformErrorMessage } from "./domChanges.js";
+import { isValidUrl } from "./helper.js";
 
 const editCupcakeForm = document.getElementById("edit-cupcake");
 
@@ -28,7 +29,11 @@ async function editCupcake(e) {
     formErrorMessage("Rating have to be between 0 and 10");
   } else if (isNaN(parseFloat(formData.rating))) {
     formErrorMessage("Rating have to be a number");
+  } else if (formData.image && !isValidUrl(formData.image)) {
+    // if image exist
+    formErrorMessage("Image have to be an url");
   } else {
+    removeformErrorMessage();
     try {
       let id = this.parentElement.dataset.id;
       // const response = await axios.patch(`/api/cupcakes/${id}`);

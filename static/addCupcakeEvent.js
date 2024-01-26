@@ -1,5 +1,10 @@
 // POST
-import { createCupcakeHTML, formErrorMessage } from "./domChanges.js";
+import {
+  createCupcakeHTML,
+  formErrorMessage,
+  removeformErrorMessage,
+} from "./domChanges.js";
+import { isValidUrl } from "./helper.js";
 
 export function addCupcakeEvent() {
   const addCupcakeForm = document.getElementById("add-cupcake");
@@ -22,12 +27,17 @@ export function addCupcakeEvent() {
           formData[element.name] = element.value;
         }
     }
+    console.log(formData);
     if (formData.rating > 10 || formData.rating < 0) {
       // add error
       formErrorMessage("Rating have to be between 0 and 10");
     } else if (isNaN(parseFloat(formData.rating))) {
       formErrorMessage("Rating have to be a number");
+    } else if (formData.image && !isValidUrl(formData.image)) {
+      // if image exist
+      formErrorMessage("Image have to be an url");
     } else {
+      removeformErrorMessage();
       try {
         const response = await axios.post("/api/cupcakes", formData, {
           headers: {

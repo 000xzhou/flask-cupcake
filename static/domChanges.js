@@ -46,5 +46,12 @@ export function filterCupcakesHTML() {
 export function formErrorMessage(msg) {
   const errorMsg = document.getElementById("error-msg");
   errorMsg.textContent = msg;
-  console.log(msg);
+  // setTimeout(() => {
+  //   errorMsg.textContent = ""; // Clear the text content after 3sec
+  // }, 3000);
+}
+
+export function removeformErrorMessage() {
+  const errorMsg = document.getElementById("error-msg");
+  errorMsg.textContent = "";
 }
