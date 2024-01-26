@@ -1,4 +1,6 @@
 // PATCH
+import { errorMessage } from "./domChanges.js";
+
 const editCupcakeForm = document.getElementById("edit-cupcake");
 
 editCupcakeForm.addEventListener("submit", editCupcake);
@@ -20,29 +22,34 @@ async function editCupcake(e) {
       }
     }
   }
-  try {
-    let id = this.parentElement.dataset.id;
-    // const response = await axios.patch(`/api/cupcakes/${id}`);
-    const response = await axios.patch(
-      `/api/cupcakes/${document.getElementById("id").value}`,
-      formData,
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    console.log("Response:", response.data);
-    // redirect back to home after suessful edit
-    window.location.href = "/";
-  } catch (error) {
-    console.error(
-      "Error Code:",
-      error.code,
-      "\nError Name:",
-      error.name,
-      "\nError Message:",
-      error.message
-    );
+  if (formData.rating > 10 || formData.rating < 0) {
+    // add error
+    errorMessage("Rating have to be between 0 and 10");
+  } else {
+    try {
+      let id = this.parentElement.dataset.id;
+      // const response = await axios.patch(`/api/cupcakes/${id}`);
+      const response = await axios.patch(
+        `/api/cupcakes/${document.getElementById("id").value}`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log("Response:", response.data);
+      // redirect back to home after suessful edit
+      window.location.href = "/";
+    } catch (error) {
+      console.error(
+        "Error Code:",
+        error.code,
+        "\nError Name:",
+        error.name,
+        "\nError Message:",
+        error.message
+      );
+    }
   }
 }

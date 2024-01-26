@@ -1,5 +1,5 @@
 // POST
-import { createCupcakeHTML } from "./cupcakeChanges.js";
+import { createCupcakeHTML, errorMessage } from "./domChanges.js";
 
 export function addCupcakeEvent() {
   const addCupcakeForm = document.getElementById("add-cupcake");
@@ -22,36 +22,40 @@ export function addCupcakeEvent() {
           formData[element.name] = element.value;
         }
     }
-
-    try {
-      const response = await axios.post("/api/cupcakes", formData, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      // Handle success
-      // console.log("Response:", response.data);
-      let data = response.data;
-      createCupcakeHTML(
-        data.flavor,
-        data.size,
-        data.rating,
-        data.image,
-        data.id
-      );
-      for (let i = 0; i < formElements.length; i++) {
-        formElements[i].value = "";
+    if (formData.rating > 10 || formData.rating < 0) {
+      // add error
+      errorMessage("Rating have to be between 0 and 10");
+    } else {
+      try {
+        const response = await axios.post("/api/cupcakes", formData, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        // Handle success
+        // console.log("Response:", response.data);
+        let data = response.data;
+        createCupcakeHTML(
+          data.flavor,
+          data.size,
+          data.rating,
+          data.image,
+          data.id
+        );
+        for (let i = 0; i < formElements.length; i++) {
+          formElements[i].value = "";
+        }
+      } catch (error) {
+        // Handle error
+        console.error(
+          "Error Code:",
+          error.code,
+          "\nError Name:",
+          error.name,
+          "\nError Message:",
+          error.message
+        );
       }
-    } catch (error) {
-      // Handle error
-      console.error(
-        "Error Code:",
-        error.code,
-        "\nError Name:",
-        error.name,
-        "\nError Message:",
-        error.message
-      );
     }
   }
 }

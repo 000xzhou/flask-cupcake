@@ -38,28 +38,13 @@ export function createCupcakeHTML(flavor, size, rating, image, id) {
   // refresh the delete btn eventlistener
   deleteCupcake();
 }
-export function editCupcakeHTML() {
-  // Don't need this since it's a redirect
-}
 
-export function deleteCupcakeHTML(cupcake) {
-  // don't need since it's just 1 line. added in deletecupcakeevent
-}
 export function filterCupcakesHTML() {
   createCupcakeHTML();
 }
-/* <div class="flex" id="list-of-cupcakes">
-  {% for cupcake in results %}
-  <div class="cupcake" data-id="{{cupcake.id}}">
-    <p>{{cupcake.flavor}}</p>
-    <p>{{cupcake.size}}</p>
-    <p>{{cupcake.rating}}</p>
-    <img
-      src="{{cupcake.image}}"
-      alt="image of cupcake"
-      width="200"
-      height="300"
-    />
-    <a href="/cupcakes/{{cupcake.id}}">Edit</a>
-    <button class="delete-btn">Delete</button>
-  </div> */
+
+export function errorMessage(msg) {
+  const errorMsg = document.getElementById("error-msg");
+  errorMsg.textContent = msg;
+  console.log(msg);
+}
