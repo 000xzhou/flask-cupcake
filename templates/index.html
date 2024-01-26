@@ -25,7 +25,7 @@
     <h3>List of cupcakes</h3>
     <div class="flex">
       {% for cupcake in cupcakes %}
-      <div class="cupcake">
+      <div class="cupcake" data-id="{{cupcake.id}}">
         <p>{{cupcake.flavor}}</p>
         <p>{{cupcake.size}}</p>
         <p>{{cupcake.rating}}</p>
