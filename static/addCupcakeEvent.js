@@ -27,7 +27,6 @@ export function addCupcakeEvent() {
           formData[element.name] = element.value;
         }
     }
-    console.log(formData);
     if (formData.rating > 10 || formData.rating < 0) {
       // add error
       formErrorMessage("Rating have to be between 0 and 10");
