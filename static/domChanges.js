@@ -39,8 +39,12 @@ export function createCupcakeHTML(flavor, size, rating, image, id) {
   deleteCupcake();
 }
 
-export function filterCupcakesHTML() {
-  createCupcakeHTML();
+export function filterCupcakesHTML(dataList) {
+  const cupcakeList = document.getElementById("list-of-cupcakes");
+  cupcakeList.innerText = "";
+  dataList.forEach((data) => {
+    createCupcakeHTML(data.flavor, data.size, data.rating, data.image, data.id);
+  });
 }
 
 export function formErrorMessage(msg) {

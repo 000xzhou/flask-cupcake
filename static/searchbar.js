@@ -1,33 +1,37 @@
+import { filterCupcakesHTML } from "./domChanges.js";
 // GET
 export function searchForFlavor() {
   const searchCupcake = document.getElementById("search-cupcake");
 
-  searchCupcake.addEventListener("submit", addcupcake);
+  searchCupcake.addEventListener("submit", searchCupcakeBar);
 
-  async function addcupcake(e) {
+  async function searchCupcakeBar(e) {
     e.preventDefault();
     let searchInput = document.getElementById("searchFlavor").value;
-    try {
-      const response = await axios.get(`/api/search?flavor=${searchInput}`);
-      // Handle success
-      console.log(response);
-      const cupcakeList = document.getElementById("list-of-cupcakes");
-      if (response.data.length == 0) {
-        cupcakeList.innerText = "No cupcake found";
-      }
-      // Handle the response and update the search results container
 
-      searchInput = "";
-    } catch (error) {
-      // Handle error
-      console.error(
-        "Error Code:",
-        error.code,
-        "\nError Name:",
-        error.name,
-        "\nError Message:",
-        error.message
-      );
+    if (searchInput != "") {
+      try {
+        const response = await axios.get(`/api/search?flavor=${searchInput}`);
+        // Handle success
+        const cupcakeList = document.getElementById("list-of-cupcakes");
+        if (response.data.length == 0) {
+          cupcakeList.innerText = "No cupcake found";
+        }
+        // Handle the response and update the search results container
+        filterCupcakesHTML(response.data);
+
+        // searchInput = "";  better to let them keep what they look for
+      } catch (error) {
+        // Handle error
+        console.error(
+          "Error Code:",
+          error.code,
+          "\nError Name:",
+          error.name,
+          "\nError Message:",
+          error.message
+        );
+      }
     }
   }
 }
