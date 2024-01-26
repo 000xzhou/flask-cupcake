@@ -1,5 +1,5 @@
 // POST
-import { createCupcakeHTML, errorMessage } from "./domChanges.js";
+import { createCupcakeHTML, formErrorMessage } from "./domChanges.js";
 
 export function addCupcakeEvent() {
   const addCupcakeForm = document.getElementById("add-cupcake");
@@ -24,7 +24,9 @@ export function addCupcakeEvent() {
     }
     if (formData.rating > 10 || formData.rating < 0) {
       // add error
-      errorMessage("Rating have to be between 0 and 10");
+      formErrorMessage("Rating have to be between 0 and 10");
+    } else if (isNaN(parseFloat(formData.rating))) {
+      formErrorMessage("Rating have to be a number");
     } else {
       try {
         const response = await axios.post("/api/cupcakes", formData, {

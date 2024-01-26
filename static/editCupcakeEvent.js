@@ -1,5 +1,5 @@
 // PATCH
-import { errorMessage } from "./domChanges.js";
+import { formErrorMessage } from "./domChanges.js";
 
 const editCupcakeForm = document.getElementById("edit-cupcake");
 
@@ -22,9 +22,12 @@ async function editCupcake(e) {
       }
     }
   }
+  console.log(formData.rating);
   if (formData.rating > 10 || formData.rating < 0) {
     // add error
-    errorMessage("Rating have to be between 0 and 10");
+    formErrorMessage("Rating have to be between 0 and 10");
+  } else if (isNaN(parseFloat(formData.rating))) {
+    formErrorMessage("Rating have to be a number");
   } else {
     try {
       let id = this.parentElement.dataset.id;

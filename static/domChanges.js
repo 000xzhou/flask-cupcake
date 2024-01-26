@@ -43,7 +43,7 @@ export function filterCupcakesHTML() {
   createCupcakeHTML();
 }
 
-export function errorMessage(msg) {
+export function formErrorMessage(msg) {
   const errorMsg = document.getElementById("error-msg");
   errorMsg.textContent = msg;
   console.log(msg);
