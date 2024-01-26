@@ -6,6 +6,9 @@ input,
 select {
   width: 100%;
 }
+select {
+  padding: 0.25rem;
+}
 button[type="submit"] {
   padding-block: 0.5rem;
 }
@@ -25,6 +28,7 @@ button:hover {
   width: 20rem;
   padding: 1rem;
 }
+
 .cupcake {
   margin-inline: 1rem;
 }
