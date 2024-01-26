@@ -1,3 +1,5 @@
+import { deleteCupcake } from "./deleteCupcakeEvent.js";
+
 export function createCupcakeHTML(flavor, size, rating, image, id) {
   const cupcakeList = document.getElementById("list-of-cupcakes");
   // creating elements
@@ -32,13 +34,20 @@ export function createCupcakeHTML(flavor, size, rating, image, id) {
   cupcake.appendChild(cupcakeImage);
   cupcake.appendChild(editLink);
   cupcake.appendChild(deleteLink);
+
+  // refresh the delete btn eventlistener
+  deleteCupcake();
 }
 export function editCupcakeHTML() {
   // Don't need this since it's a redirect
 }
 
-export function deleteCupcakeHTML() {}
-export function filterCupcakesHTML() {}
+export function deleteCupcakeHTML(cupcake) {
+  // don't need since it's just 1 line. added in deletecupcakeevent
+}
+export function filterCupcakesHTML() {
+  createCupcakeHTML();
+}
 /* <div class="flex" id="list-of-cupcakes">
   {% for cupcake in results %}
   <div class="cupcake" data-id="{{cupcake.id}}">

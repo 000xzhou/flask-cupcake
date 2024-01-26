@@ -10,6 +10,7 @@ export function deleteCupcake() {
       let id = this.parentElement.dataset.id;
       const response = await axios.delete(`/api/cupcakes/${id}`);
       console.log("Response:", response.data);
+      this.parentElement.remove();
     } catch (error) {
       console.error(
         "Error Code:",

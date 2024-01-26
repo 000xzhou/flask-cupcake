@@ -11,8 +11,12 @@ export function searchForFlavor() {
       const response = await axios.get(`/api/search?flavor=${searchInput}`);
       // Handle success
       console.log(response);
-      let cupcakeList = document.getElementById("list-of-cupcakes");
+      const cupcakeList = document.getElementById("list-of-cupcakes");
+      if (response.data.length == 0) {
+        cupcakeList.innerText = "No cupcake found";
+      }
       // Handle the response and update the search results container
+
       searchInput = "";
     } catch (error) {
       // Handle error
