@@ -1,4 +1,6 @@
 // POST
+import { createCupcakeHTML } from "./cupcakeChanges.js";
+
 export function addCupcakeEvent() {
   const addCupcakeForm = document.getElementById("add-cupcake");
 
@@ -15,11 +17,10 @@ export function addCupcakeEvent() {
         element.tagName === "INPUT" ||
         element.tagName === "SELECT" ||
         element.tagName === "TEXTAREA"
-      ) {
+      )
         if (element.value != "") {
           formData[element.name] = element.value;
         }
-      }
     }
 
     try {
@@ -29,8 +30,15 @@ export function addCupcakeEvent() {
         },
       });
       // Handle success
-      console.log("Response:", response.data);
-
+      // console.log("Response:", response.data);
+      let data = response.data;
+      createCupcakeHTML(
+        data.flavor,
+        data.size,
+        data.rating,
+        data.image,
+        data.id
+      );
       for (let i = 0; i < formElements.length; i++) {
         formElements[i].value = "";
       }
