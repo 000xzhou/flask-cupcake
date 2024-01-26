@@ -1,8 +1,12 @@
 .flex {
   display: flex;
 }
+button[type="submit"],
+input {
+  width: 100%;
+}
 button[type="submit"] {
-  padding: 1rem 2rem;
+  padding-block: 0.5rem;
 }
 .edit-btn,
 .delete-btn {
@@ -15,4 +19,11 @@ button {
 }
 button:hover {
   background-color: aquamarine;
+}
+.form-box {
+  width: 20rem;
+  padding: 1rem;
+}
+.cupcake {
+  margin-inline: 1rem;
 }

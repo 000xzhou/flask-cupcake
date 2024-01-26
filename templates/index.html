@@ -7,10 +7,25 @@
     <link rel="stylesheet" href="static/style.css" />
   </head>
   <body>
-    <button type="submit">Add Cupcake</button>
+    <form id="add" action="/api/cupcakes" method="POST" class="form-box">
+      {{ form.hidden_tag() }}
+      <!--add type=hidden form fields -->
+      <h3>Add a cupcake</h3>
+      {% for field in form if field.widget.input_type != 'hidden' %}
+      <p>
+        {{ field.label }} {{ field }} {% for error in field.errors %} {{ error
+        }} {% endfor %}
+      </p>
+
+      {% endfor %}
+
+      <button type="submit">Add Cupcake</button>
+    </form>
+    <hr />
+    <h3>List of cupcakes</h3>
     <div class="flex">
       {% for cupcake in cupcakes %}
-      <div>
+      <div class="cupcake">
         <p>{{cupcake.flavor}}</p>
         <p>{{cupcake.size}}</p>
         <p>{{cupcake.rating}}</p>
