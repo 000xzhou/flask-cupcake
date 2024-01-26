@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 load_dotenv()
 import os
 from forms import AddCupcake, EditCupcake
+from sqlalchemy import or_,and_
 
 app = Flask(__name__)
 secret_key = os.environ.get('SECRET_KEY')
@@ -33,10 +34,25 @@ def home():
 
 @app.route('/api/search')
 def get_cupcake_search_result():
+    filters = []
+    # Get filter values from the request
     flavor = request.args.get('flavor', '').lower()
-    results_flavor = Cupcake.query.filter(Cupcake.flavor.ilike(f'%{flavor}%')).all()
-    cupcakes = [c.serialize_cupcake() for c in results_flavor]
+    size = request.args.get('size', '').lower()
+    # Construct filters based on user input
+    if flavor:
+        filters.append(Cupcake.flavor.ilike(f'%{flavor}%'))
+    if size:
+        filters.append(Cupcake.size.ilike(f'%{size}%'))
+
+    # Combine filters using OR operator
+    if filters:
+        results = Cupcake.query.filter(and_(*filters)).all()
+    else:
+        results = Cupcake.query.all()
+    
+    cupcakes = [c.serialize_cupcake() for c in results]
     return jsonify(cupcakes)
+
 
 @app.route('/cupcakes/<cupcake_id>')
 def edit_cupcake_page(cupcake_id):

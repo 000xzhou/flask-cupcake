@@ -49,11 +49,16 @@ button:hover {
 }
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
+  .search-forms {
+    grid-template-columns: 70% 30%;
+    gap: 10px;
+    gap: 1rem;
+  }
 }
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
   .search-forms {
-    grid-template-columns: 70% 10% 10%;
+    grid-template-columns: 80% 20%;
     gap: 10px;
     gap: 1rem;
   }
