@@ -2,7 +2,8 @@
   display: flex;
 }
 button[type="submit"],
-input {
+input,
+select {
   width: 100%;
 }
 button[type="submit"] {
